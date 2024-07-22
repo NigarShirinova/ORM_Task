@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using KTest.Groups;
+using EF.Entities;
 
 namespace KTest.Services
 {
@@ -67,7 +67,7 @@ namespace KTest.Services
                 goto TeacherIdInput;
             }
 
-            Group group = new Group
+            EF.Entities.Group group = new EF.Entities.Group
             {
                 Name = name,
                 Limit = limit,

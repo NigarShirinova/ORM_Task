@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KTest.Services
 {
-    internal class TeacherServices
+    internal  class TeacherServices
     {
         public static readonly AppDbContext _context;
         static TeacherServices()
@@ -20,14 +20,15 @@ namespace KTest.Services
 
         public static void GetAllTeachers()
         {
-            foreach (var teacher in _context.Teachers.ToList()) 
+            var teacherList = _context.Teachers.ToList();
+            foreach (var teacher in teacherList)
             {
                 Console.WriteLine($"Id: {teacher.Id}, Name: {teacher.Name}, Surname: {teacher.Surname}");
             }
         }
         public static void CreateTeacher()
         {
-            TeacherNameInput: Messages.InputMessage("Teacher's name");
+        TeacherNameInput: Messages.InputMessage("Teacher's name");
             string name = Console.ReadLine();
             if (name.IsNullOrEmpty())
             {
@@ -85,7 +86,7 @@ namespace KTest.Services
             string input_id = Console.ReadLine();
             int id;
             bool isSuceeded = int.TryParse(input_id, out id);
-            if(!isSuceeded)
+            if (!isSuceeded)
             {
                 Messages.InvalidInputMessage("Teacher's id");
                 goto TeacherIdInput;
@@ -101,7 +102,7 @@ namespace KTest.Services
             var choiceInput = Console.ReadLine();
             char choice;
             isSuceeded = char.TryParse(choiceInput, out choice);
-            if(!isSuceeded)
+            if (!isSuceeded)
             {
                 Messages.InvalidInputMessage($"Choice");
             }
@@ -138,7 +139,7 @@ namespace KTest.Services
                 {
                     _context.SaveChanges();
                 }
-                catch 
+                catch
                 {
                     Messages.ErrorOccuredMessage();
                 }
@@ -147,25 +148,25 @@ namespace KTest.Services
         }
         public static void DetailsTeacher()
         {
-                GetAllTeachers();
+            GetAllTeachers();
 
-            TeacherIdInput: Messages.InputMessage("Teacher's Id");
-                string input_id = Console.ReadLine();
-                int id;
-                bool isSuceeded = int.TryParse(input_id, out id);
-                if (!isSuceeded)
-                {
-                    Messages.InvalidInputMessage("Teacher's id");
-                    goto TeacherIdInput;
-                }
-                var teacher = _context.Teachers.Find(id);
-                if (teacher is null)
-                {
-                    Messages.NotFoundMessage("Teacher");
-                    return;
-                }
+        TeacherIdInput: Messages.InputMessage("Teacher's Id");
+            string input_id = Console.ReadLine();
+            int id;
+            bool isSuceeded = int.TryParse(input_id, out id);
+            if (!isSuceeded)
+            {
+                Messages.InvalidInputMessage("Teacher's id");
+                goto TeacherIdInput;
+            }
+            var teacher = _context.Teachers.Find(id);
+            if (teacher is null)
+            {
+                Messages.NotFoundMessage("Teacher");
+                return;
+            }
             Console.WriteLine($"id: {teacher.Id}, name: {teacher.Name}, surname: {teacher.Surname} ");
         }
-     
+
     }
 }

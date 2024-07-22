@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KTest.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240719165534_IsDeletedColumnAdded")]
-    partial class IsDeletedColumnAdded
+    [Migration("20240720081429_addIsdeletedDefaultValueToTeacher")]
+    partial class addIsdeletedDefaultValueToTeacher
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,9 @@ namespace KTest.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GroupId");
@@ -60,6 +63,9 @@ namespace KTest.Migrations
 
                     b.Property<int>("AsingmentId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Point")
                         .HasColumnType("decimal(18,2)");
@@ -83,6 +89,9 @@ namespace KTest.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Limit")
                         .HasColumnType("int");
@@ -118,6 +127,9 @@ namespace KTest.Migrations
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
